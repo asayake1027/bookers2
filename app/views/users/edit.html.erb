@@ -1,0 +1,74 @@
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+  <span><%= link_to 'Bookers', "/", class: "navbar-brand" %></span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <li><%= link_to '  Home', user_path(current_user.id), class: "fas fa-home nav-link text-light" %></li>
+          <li><%= link_to '  Users', users_path, class: "fas fa-users nav-link text-light" %></li>
+          <li><%= link_to '  Books', "/books", class: "fas fa-book-open nav-link text-light" %></li>
+          <li><%= link_to '  logout', destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+
+  <main>
+  <p id="notice"></p>
+<div class='container'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <h2>User info</h2>
+    
+  <% if @user.errors.any? %>
+    <div class="errormes">
+        <h3><%= @user.errors.count %> error prohibited this obj from being saved:</h3>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+　<% end %>
+    
+    
+    <%= form_with model: @user, local:true do |f| %>
+      
+      <div class="form-group">
+        <label for="user_name">Name</label>
+        <%= f.text_field :name, class: "form-control name" %>
+      </div>
+     <div class="form-group">
+        <label for="user_image">Image</label>
+        <%= f.attachment_field :profile_image, class: "w-100" %>
+      </div>
+      <div class="form-group">
+        <label for="user_introduction">Introduction</label>
+        <%= f.text_area :introduction, class: "form-control introduction" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Update User', class:"btn btn-secondary" %>
+    <% end %>
+      </div>
+  </div>
+</div>
+
+      </main>
+    <footer>
+  <div class='container mt-5'>
+  	<div class='row'>
+    	<div class='mx-auto'>
+    		<p>CopyRight Infratop.inc</p>
+    	</div>
+    </div>
+  </div>
+</footer>
